@@ -1,12 +1,30 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using RunGroupWebApp.Data;
+using RunGroupWebApp.Interfaces;
+using RunGroupWebApp.Models;
 
 namespace RunGroupWebApp.Controllers
 {
     public class RaceController : Controller
     {
-        public IActionResult Index()
+        private readonly IRaceRepository _raceRepository;
+
+        public RaceController(IRaceRepository raceRepository)
         {
-            return View();
+            _raceRepository = raceRepository;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            IEnumerable<Race> race = await _raceRepository.GetAll();
+            return View(race);
+        }
+
+        public async Task<IActionResult> Detail(int id)
+        {
+            Race race = await _raceRepository.GetByIdAsync(id);
+            return View(race);
         }
     }
 }

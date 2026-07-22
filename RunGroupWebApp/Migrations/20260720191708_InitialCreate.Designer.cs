@@ -11,7 +11,7 @@ using RunGroupWebApp.Data;
 namespace RunGroupWebApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260719103434_InitialCreate")]
+    [Migration("20260720191708_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
