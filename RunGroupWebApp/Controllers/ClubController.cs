@@ -30,7 +30,7 @@ namespace RunGroupWebApp.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> create(Club club)
+        public async Task<IActionResult> Create(Club club)
         {
             if(!ModelState.IsValid)
             {
