@@ -1,0 +1,49 @@
+﻿@model RunGroupWebApp.ViewModels.EditClubViewModel
+@using RunGroupWebApp.Data.Enum
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<form method="post" asp-action="Edit" enctype="multipart/form-data">
+    <input type="hidden" value="AddressId" id="AddressId" />
+    <div class="form-group">
+        <label asp-for="Title">Title</label>
+        <input asp-for="Title" class="form-control" placeholder="Title">
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Description</label>
+        <input asp-for="Description" class="form-control" placeholder="Description">
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="clubCategory">ClubCategory</label>
+        <select asp-for="clubCategory" asp-items="@Html.GetEnumSelectList<ClubCategory>()" class="form-control">
+            <option>---Select---</option>
+        </select>
+        <span asp-validation-for="clubCategory" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="address.Street">Street</label>
+        <input asp-for="address.Street" class="form-control" placeholder="Street">
+        <span asp-validation-for="address.Street" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="address.City">City</label>
+        <input asp-for="address.City" class="form-control" placeholder="City">
+        <span asp-validation-for="address.City" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="address.State">State</label>
+        <input asp-for="address.State" class="form-control" placeholder="State">
+        <span asp-validation-for="address.State" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Image">Image</label>
+        <input asp-for="Image" type="file" class="form-control" placeholder="Image">
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

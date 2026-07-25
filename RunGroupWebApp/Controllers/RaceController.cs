@@ -58,5 +58,64 @@ namespace RunGroupWebApp.Controllers
             }
             return View(raceVM);
         }
+        public async Task<IActionResult> Edit(int id)
+        {
+            var race = await _raceRepository.GetByIdAsync(id);
+            if (race == null) return View("Error");
+            var raceVM = new EditRaceViewModel
+            {
+                Id = race.Id,
+                Title = race.Title,
+                Description = race.Description,
+                AddressId = race.AddressId,
+                address = race.Address,
+                Url = race.Image,
+                raceCategory = race.RaceCategory,
+
+
+            };
+            return View(raceVM);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, EditRaceViewModel raceVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Failed to edit Model)");
+                return View("Edit", raceVM);
+            }
+            var userRace = await _raceRepository.GetByIdAsyncNoTracking(id);
+            if (userRace != null)
+            {
+                try
+                {
+                    await _photoService.DeletePhotoAsync(userRace.Image);
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Could not delete photo");
+                    return View(raceVM);
+                }
+                var photoResult = await _photoService.AddPhotoAsync(raceVM.Image);
+
+                var race = new Race
+                {
+                    Id = id,
+                    Title = raceVM.Title,
+                    Description = raceVM.Description,
+                    Image = photoResult.Url.ToString(),
+                    RaceCategory = raceVM.raceCategory,
+                    AddressId = raceVM.AddressId,
+                    Address = raceVM.address
+                };
+                _raceRepository.Update(race);
+
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(raceVM);
+            }
+        }
     }
 }
