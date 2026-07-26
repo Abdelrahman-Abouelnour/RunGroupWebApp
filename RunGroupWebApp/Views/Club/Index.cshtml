@@ -38,6 +38,12 @@
                       >
                         Edit
                       </a>
+                      <a asp-controller ="Club" asp-action="Delete" asp-route-id="@item.Id"
+                        type="button"
+                        class="btn btn-sm btn-outline-secondary"
+                      >
+                        Delete
+                      </a>
                     </div>
                     <small class="text-body-secondary">@item.ClubCategory</small>
                   </div>
