@@ -1,0 +1,15 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace RunGroupWebApp.ViewModels
+{
+    public class LoginVM
+    {
+        [Display(Name = "Email Address")]
+        [Required(ErrorMessage = "Email address is required")]
+        public string EmailAddress { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+    }
+}
