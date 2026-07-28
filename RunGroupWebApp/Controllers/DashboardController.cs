@@ -24,5 +24,10 @@ namespace RunGroupWebApp.Controllers
             };
             return View(dashboardViewModel);
         }
+        public async Task<IActionResult> EditUserProfile()
+        {
+
+            return View();
+        }
     }
 }
