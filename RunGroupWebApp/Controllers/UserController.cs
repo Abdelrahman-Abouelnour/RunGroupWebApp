@@ -23,7 +23,8 @@ namespace RunGroupWebApp.Controllers
                     Id = user.Id,
                     UserName = user.UserName,
                     Pace = user.Pace,
-                    Mileage = user.Mileage
+                    Mileage = user.Mileage,
+                    Image = user.ProfileImageUrl
                 };
                 res.Add(userVM);
             }
